@@ -4,7 +4,7 @@ import routes from './routes.js';
 
 const server = Hapi.server({
   port: process.env.PORT || 3030,
-  host: process.env.HOST || 'localhost',
+  // host: process.env.HOST || 'localhost',
   routes: { cors: { origin: [ '*' ] } },
 });
 
