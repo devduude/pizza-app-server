@@ -52,8 +52,7 @@ const Orders = sequelize.define('orders', {
 
 
 class DBhandler {
-  constructor (params) {
-    this.params = params;
+  constructor () {
     this.client = sequelize;
     this.orders = Orders;
 
