@@ -2,8 +2,10 @@ import { Sequelize } from 'sequelize';
 import config from 'config';
 
 
+const dbURL = process.env.DATABASE_URL || config.get('sequelize.url');
+
 const sequelize = new Sequelize(
-  config.get('sequelize.url'),
+  dbURL,
   {
     dialect: 'postgres',
     dialectOptions: { ssl: { rejectUnauthorized: false } },
