@@ -52,11 +52,43 @@ const Orders = sequelize.define('orders', {
   },
 });
 
+const Pizzas = sequelize.define('pizzas', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  key: {
+    type: Sequelize.STRING,
+    field: 'key',
+  },
+  title: {
+    type: Sequelize.STRING,
+    field: 'title',
+  },
+  description: {
+    type: Sequelize.STRING,
+    field: 'description',
+  },
+  priceUSD: {
+    type: Sequelize.INTEGER,
+    field: 'price_usd',
+  },
+  priceEUR: {
+    type: Sequelize.INTEGER,
+    field: 'price_eur',
+  },
+  imageSRC: {
+    type: Sequelize.STRING,
+    field: 'image_src',
+  },
+});
 
 class DBhandler {
   constructor () {
     this.client = sequelize;
     this.orders = Orders;
+    this.pizzas = Pizzas;
 
     this.init();
   }
@@ -108,6 +140,26 @@ class DBhandler {
         where: { orderID },
         raw: true,
       });
+
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async addPizza (pizzaDetails) {
+    try {
+      const data = await this.pizzas.create(pizzaDetails);
+
+      return data.title;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getPizzas () {
+    try {
+      const data = await this.pizzas.findAll();
 
       return data;
     } catch (error) {
