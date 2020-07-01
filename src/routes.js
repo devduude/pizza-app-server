@@ -55,10 +55,38 @@ const addOrder = {
   },
 };
 
+const getPizzas = {
+  method: 'GET',
+  path: '/pizza',
+  handler: async (request, hapi) => {
+    const pizzaData = await DB.getPizzas();
+
+    if (!pizzaData) return hapi.response({ statusCode: 500, message: 'Couldn\'t get the pizzas' }).code(500);
+
+    return hapi.response({ statusCode: 200, payload: pizzaData, message: 'Success' }).code(200);
+  },
+};
+
+const addPizza = {
+  method: 'POST',
+  path: '/pizza/insert',
+  handler: async (request, hapi) => {
+    const pizzaData = request.payload;
+
+    const pizzaTitle = await DB.addPizza(pizzaData);
+
+    if (!pizzaTitle) return hapi.response({ statusCode: 500, message: 'The pizza was not added' }).code(500);
+
+    return hapi.response({ statusCode: 200, message: `The pizza: ${pizzaTitle} was added!` }).code(200);
+  },
+};
+
 
 export default [
   getOrders,
   getOrder,
   addOrder,
   removeOrder,
+  getPizzas,
+  addPizza,
 ];
