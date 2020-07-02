@@ -13,3 +13,7 @@
 `POST /orders/insert` - add new order
 
 `POST /orders/delete` - remove order
+
+`GET /pizza` - get all pizzas
+
+`POST /pizza/insert` - add new pizza
