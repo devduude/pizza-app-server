@@ -26,6 +26,10 @@ const Orders = sequelize.define('orders', {
     type: Sequelize.DATE,
     field: 'order_date',
   },
+  orderDetails: {
+    type: Sequelize.STRING,
+    field: 'order_details',
+  },
   firstName: {
     type: Sequelize.STRING,
     field: 'first_name',
